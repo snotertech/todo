@@ -35,8 +35,8 @@ function App() {
   return (
     <>
       <Header />
-      <Grid >
-        <Grid container>
+      <div className='app-container'>
+        <Grid container className='add-todo'>
           <Grid item>
             <TextField id="outlined-basic"
               label="To-do"
@@ -54,7 +54,7 @@ function App() {
         {todos.map((todo) => (
           <Todo key={todo.id} todo={todo} onToggle={handleToggle} onDelete={handleDelete}/>
         ))}
-      </Grid>
+      </div>
     </>
   );
 }

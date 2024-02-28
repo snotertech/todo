@@ -1,0 +1,15 @@
+.app-container{
+    display: flex;
+    flex-direction: column;
+    padding: 5rem;
+}
+
+.add-todo{
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+#outlined-basic{
+    width: 80vw;
+}
