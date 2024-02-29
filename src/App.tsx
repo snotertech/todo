@@ -1,28 +1,16 @@
-import { useState } from 'react';
 import './App.css';
 import Todo from './components/Todo';
 import { useTodoStore } from './store';
-import { Button, Grid, TextField } from '@mui/material';
+import { Grid } from '@mui/material';
 import Header from './components/Header';
-
+import TodoForm from './components/TodoForm';
 function App() {
-  const [inputText, setInputText] = useState('')
   const todos = useTodoStore((state) => state.todos)
   const addTodo = useTodoStore((state) => state.addTodo)
   const toggleTodo = useTodoStore((state) => state.toggleTodo)
   const deleteTodo = useTodoStore((state) => state.deleteTodo)
   const updateTodo = useTodoStore((state) => state.updateTodo)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.target.value)
-  }
-
-  const handleAddTodo = () => {
-    if (inputText !== '') {
-      addTodo(inputText)
-      setInputText('')
-    }
-  }
 
   const handleToggle = (id: number) => {
     toggleTodo(id)
@@ -41,24 +29,18 @@ function App() {
     <>
       <Header />
       <div className='app-container'>
-        <Grid container className='add-todo'>
-          <Grid item>
-            <TextField id="outlined-basic"
-              label="To-do"
-              variant="outlined"
-              type="text"
-              value={inputText}
-              onChange={handleInputChange}
-              fullWidth
+        <TodoForm onAddTodo={addTodo} />
+        <Grid container>
+          {todos.map((todo) => (
+            <Todo
+              key={todo.id}
+              todo={todo}
+              onToggle={handleToggle}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
             />
-          </Grid>
-          <Grid item alignItems="stretch" style={{ display: "flex" }}>
-            <Button variant="contained" onClick={handleAddTodo}>Add</Button>
-          </Grid>
+          ))}
         </Grid>
-        {todos.map((todo) => (
-          <Todo key={todo.id} todo={todo} onToggle={handleToggle} onDelete={handleDelete} onEdit={handleEdit}/>
-        ))}
       </div>
     </>
   );

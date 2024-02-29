@@ -60,6 +60,7 @@ const Todo: React.FC<TodoProps> = ({ todo, onToggle, onDelete, onEdit }) => {
             {editing ? (
                 <Grid container className='edit'>
                     <TextField
+                        className="edit-input"
                         autoFocus
                         value={editedText}
                         onChange={(e) => setEditedText(e.target.value)}
