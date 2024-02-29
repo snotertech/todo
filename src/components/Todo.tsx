@@ -4,6 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Checkbox from '@mui/material/Checkbox';
 import { useState } from "react";
+import '../index.css'
 
 interface TodoProps {
     todo: TodoInterface;

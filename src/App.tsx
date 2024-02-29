@@ -30,7 +30,7 @@ function App() {
       <Header />
       <div className='app-container'>
         <TodoForm onAddTodo={addTodo} />
-        <Grid container>
+        <div className='list-container'>
           {todos.map((todo) => (
             <Todo
               key={todo.id}
@@ -40,7 +40,7 @@ function App() {
               onEdit={handleEdit}
             />
           ))}
-        </Grid>
+        </div>
       </div>
     </>
   );

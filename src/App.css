@@ -14,5 +14,8 @@
     width: 100vh;
 }
 
-
+.list-container{
+  width: 74%;
+  align-self: center;
+}
 
