@@ -1,4 +1,4 @@
-import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField } from "@mui/material";
+import { Button, Grid, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField } from "@mui/material";
 import { TodoInterface } from "../types/TodoInterface";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -15,7 +15,7 @@ interface TodoProps {
 const Todo: React.FC<TodoProps> = ({ todo, onToggle, onDelete, onEdit }) => {
     const [editing, setEditing] = useState(false);
     const [editedText, setEditedText] = useState(todo.text)
-    
+
 
     const handleToggle = () => {
         onToggle(todo.id)
@@ -31,22 +31,22 @@ const Todo: React.FC<TodoProps> = ({ todo, onToggle, onDelete, onEdit }) => {
 
     const handleChange = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        if(editedText !== "") {
+        if (editedText !== "") {
             onEdit(todo.id, editedText)
             setEditing(false)
         }
     }
 
     const handleTextClick = () => {
-       setEditing(false)
+        setEditing(false)
     }
 
     const handleEditButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation(); 
+        e.stopPropagation();
         handleEdit();
     };
 
-    
+
     return (
         <ListItem
             key={todo.id}
@@ -58,14 +58,16 @@ const Todo: React.FC<TodoProps> = ({ todo, onToggle, onDelete, onEdit }) => {
             disablePadding
         >
             {editing ? (
-                <div>
+                <Grid container className='edit'>
                     <TextField
                         autoFocus
                         value={editedText}
                         onChange={(e) => setEditedText(e.target.value)}
                     />
-                    <button onClick={handleChange}>Save</button>
-                </div>
+                    <Grid item alignItems="stretch" style={{ display: "flex" }}>
+                        <Button variant="contained" onClick={handleChange}>Save</Button>
+                    </Grid>
+                </Grid>
             ) : (
                 <ListItemButton role="undefined" onClick={handleToggle} dense>
                     <ListItemIcon>
@@ -77,7 +79,7 @@ const Todo: React.FC<TodoProps> = ({ todo, onToggle, onDelete, onEdit }) => {
                         />
                     </ListItemIcon>
                     <ListItemText primary={todo.text} onClick={handleTextClick} />
-                    <IconButton edge="end" aria-label="edit" onClick={handleEditButtonClick}> 
+                    <IconButton edge="end" aria-label="edit" onClick={handleEditButtonClick}>
                         <EditIcon />
                     </IconButton>
                 </ListItemButton>
