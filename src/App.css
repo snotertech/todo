@@ -1,7 +1,7 @@
 .app-container{
     display: flex;
     flex-direction: column;
-    padding: 5rem;
+    padding: 5rem 10rem;
 }
 
 .add-todo{
@@ -11,5 +11,6 @@
 }
 
 #outlined-basic{
-    width: 80vw;
+    width: 60vw;
 }
+

@@ -11,6 +11,7 @@ function App() {
   const addTodo = useTodoStore((state) => state.addTodo)
   const toggleTodo = useTodoStore((state) => state.toggleTodo)
   const deleteTodo = useTodoStore((state) => state.deleteTodo)
+  const updateTodo = useTodoStore((state) => state.updateTodo)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value)
@@ -29,6 +30,10 @@ function App() {
 
   const handleDelete = (id: number) => {
     deleteTodo(id)
+  }
+
+  const handleEdit = (id: number, newText: string) => {
+    updateTodo(id, newText)
   }
 
 
@@ -52,7 +57,7 @@ function App() {
           </Grid>
         </Grid>
         {todos.map((todo) => (
-          <Todo key={todo.id} todo={todo} onToggle={handleToggle} onDelete={handleDelete}/>
+          <Todo key={todo.id} todo={todo} onToggle={handleToggle} onDelete={handleDelete} onEdit={handleEdit}/>
         ))}
       </div>
     </>

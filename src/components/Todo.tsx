@@ -1,15 +1,21 @@
-import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField } from "@mui/material";
 import { TodoInterface } from "../types/TodoInterface";
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import Checkbox from '@mui/material/Checkbox';
+import { useState } from "react";
 
 interface TodoProps {
     todo: TodoInterface;
     onToggle: (id: number) => void;
     onDelete: (id: number) => void;
+    onEdit: (id: number, newText: string) => void;
 }
 
-const Todo: React.FC<TodoProps> = ({ todo, onToggle, onDelete }) => {
+const Todo: React.FC<TodoProps> = ({ todo, onToggle, onDelete, onEdit }) => {
+    const [editing, setEditing] = useState(false);
+    const [editedText, setEditedText] = useState(todo.text)
+    
 
     const handleToggle = () => {
         onToggle(todo.id)
@@ -19,6 +25,28 @@ const Todo: React.FC<TodoProps> = ({ todo, onToggle, onDelete }) => {
         onDelete(todo.id)
     }
 
+    const handleEdit = () => {
+        setEditing(true)
+    }
+
+    const handleChange = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        if(editedText !== "") {
+            onEdit(todo.id, editedText)
+            setEditing(false)
+        }
+    }
+
+    const handleTextClick = () => {
+       setEditing(false)
+    }
+
+    const handleEditButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation(); 
+        handleEdit();
+    };
+
+    
     return (
         <ListItem
             key={todo.id}
@@ -29,17 +57,31 @@ const Todo: React.FC<TodoProps> = ({ todo, onToggle, onDelete }) => {
             }
             disablePadding
         >
-            <ListItemButton role="undefined" onClick={handleToggle} dense>
-                <ListItemIcon>
-                    <Checkbox 
-                        edge="start"
-                        checked={todo.completed}
-                        tabIndex={-1}
-                        disableRipple
+            {editing ? (
+                <div>
+                    <TextField
+                        autoFocus
+                        value={editedText}
+                        onChange={(e) => setEditedText(e.target.value)}
                     />
-                </ListItemIcon>
-                <ListItemText primary={todo.text} />
-            </ListItemButton>
+                    <button onClick={handleChange}>Save</button>
+                </div>
+            ) : (
+                <ListItemButton role="undefined" onClick={handleToggle} dense>
+                    <ListItemIcon>
+                        <Checkbox
+                            edge="start"
+                            checked={todo.completed}
+                            tabIndex={-1}
+                            disableRipple
+                        />
+                    </ListItemIcon>
+                    <ListItemText primary={todo.text} onClick={handleTextClick} />
+                    <IconButton edge="end" aria-label="edit" onClick={handleEditButtonClick}> 
+                        <EditIcon />
+                    </IconButton>
+                </ListItemButton>
+            )}
         </ListItem>
     );
 };
