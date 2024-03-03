@@ -1,52 +1,44 @@
 import { Button, Grid, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField } from "@mui/material";
-import { TodoInterface } from "../types/TodoInterface";
+import { TodoProps } from '../types/types'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Checkbox from '@mui/material/Checkbox';
 import { useState } from "react";
 import '../index.css'
 
-interface TodoProps {
-    todo: TodoInterface;
-    onToggle: (id: number) => void;
-    onDelete: (id: number) => void;
-    onEdit: (id: number, newText: string) => void;
-}
 
 const Todo: React.FC<TodoProps> = ({ todo, onToggle, onDelete, onEdit }) => {
     const [editing, setEditing] = useState(false);
     const [editedText, setEditedText] = useState(todo.text)
 
-
     const handleToggle = () => {
-        onToggle(todo.id)
+        onToggle(todo.id);
     }
 
     const handleDelete = () => {
-        onDelete(todo.id)
+        onDelete(todo.id);
     }
 
     const handleEdit = () => {
-        setEditing(true)
+        setEditing(true);
     }
 
     const handleChange = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (editedText !== "") {
-            onEdit(todo.id, editedText)
-            setEditing(false)
+            onEdit(todo.id, editedText);
+            setEditing(false);
         }
     }
 
     const handleTextClick = () => {
-        setEditing(false)
+        setEditing(false);
     }
 
     const handleEditButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         handleEdit();
     };
-
 
     return (
         <ListItem

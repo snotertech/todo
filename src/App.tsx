@@ -1,9 +1,9 @@
 import './App.css';
 import Todo from './components/Todo';
 import { useTodoStore } from './store';
-import { Grid } from '@mui/material';
 import Header from './components/Header';
 import TodoForm from './components/TodoForm';
+
 function App() {
   const todos = useTodoStore((state) => state.todos)
   const addTodo = useTodoStore((state) => state.addTodo)

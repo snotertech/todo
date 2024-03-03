@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Grid, TextField } from '@mui/material';
+import { TodoFormProps } from '../types/types';
 
-interface TodoFormProps {
-    onAddTodo: (text: string) => void
-}
 
 const TodoForm: React.FC<TodoFormProps> = ({ onAddTodo }) => {
     const [inputText, setInputText] = useState('')

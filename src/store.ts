@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { TodoInterface } from './types/TodoInterface'
+import { TodoInterface } from './types/types'
 
 interface TodoStore {
   todos: TodoInterface[];
