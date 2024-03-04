@@ -7,7 +7,7 @@ import { useState } from "react";
 import '../index.css'
 
 
-const Todo: React.FC<TodoProps> = ({ todo, onToggle, onDelete, onEdit }) => {
+const Todo = ({ todo, onToggle, onDelete, onEdit }: TodoProps) => {
     const [editing, setEditing] = useState(false);
     const [editedText, setEditedText] = useState(todo.text)
 
