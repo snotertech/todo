@@ -1,6 +1,13 @@
 import { create } from 'zustand'
-import { TodoStore } from './types/types'
+import { TodoInterface } from './types/types'
 
+export interface TodoStore {
+  todos: TodoInterface[];
+  addTodo: (text: string) => void;
+  toggleTodo: (id: number) => void;
+  deleteTodo: (id: number) => void;
+  updateTodo: (id: number, newText: string) => void;
+}
 
 
 export const useTodoStore = create<TodoStore>((set) => ({
